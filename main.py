@@ -46,6 +46,10 @@ def create(
     save_to_sync: bool,
 ):
     """Create a YouTube Playlist from Spotify Playlist"""
+    
+    not_allowed_symbols_for_title = [">","<"]
+    if any([symbol in name for symbol in not_allowed_symbols_for_title]):
+        return click.secho(f"Aborting : Your playlist name contains disallowed character.\nHere is list of disallowed of character : {not_allowed_symbols_for_title}",fg="red")
 
     spotify = SpotifyClient()
     youtube = YouTubeClient()
